@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join the trip on Journeyfy</title>
+<style>
+  body { font-family: -apple-system, system-ui, sans-serif; display: flex; min-height: 100vh;
+         align-items: center; justify-content: center; margin: 0;
+         background: linear-gradient(135deg, #66b3ff, #ff9966); color: #fff; text-align: center; }
+  .card { padding: 32px 24px; max-width: 340px; }
+  h1 { font-size: 1.6rem; margin: 0 0 8px; }
+  p  { opacity: .9; line-height: 1.45; }
+  a.btn { display: inline-block; margin-top: 18px; padding: 14px 28px; border-radius: 14px;
+          background: #fff; color: #1a6fd4; font-weight: 700; text-decoration: none; }
+  .hint { font-size: .85rem; opacity: .75; margin-top: 22px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>✈️ Journeyfy</h1>
+  <p>You've been invited to a trip!</p>
+  <a class="btn" id="open" href="#">Open in Journeyfy</a>
+  <p class="hint">Nothing happening? Make sure the Journeyfy app is installed on your iPhone, then tap the button again.</p>
+</div>
+<script>
+  var token = new URLSearchParams(location.search).get("token") || "";
+  var deepLink = "journeyfy://join?token=" + encodeURIComponent(token);
+  document.getElementById("open").href = deepLink;
+  if (token) { setTimeout(function () { location.href = deepLink; }, 400); }
+</script>
+</body>
+</html>
