@@ -2,7 +2,25 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!--
+  The invite page, published as the journeyfy-links repo's join/index.html:
+  https://frandesarrolladorweb.github.io/journeyfy-links/join/?token=…
+  (InviteService.swift and the Android AppModel make these links; messengers
+  only turn https:// into links.)
+
+  - iPhone: opens journeyfy://join?token=… by itself after 400 ms, and on a tap.
+  - Android: the button is an intent:// link to the same journeyfy://join, which
+    opens the app, or Google Play if it isn't installed (S.browser_fallback_url).
+    Chrome refuses to open an app from a timer, so on Android it waits for the
+    tap. Once docs/android/assetlinks.json is served (docs/android/README.md),
+    Android opens these links in the app without showing this page at all.
+  - Anything else (a computer): says to open the link on the phone.
+
+  The store ids: App Store 6758713463 (AppUpdateService.appStoreId), Google Play
+  com.journeyfy.app (Skip.env ANDROID_APPLICATION_ID, the Android applicationId).
+-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
 <title>Join the trip on Journeyfy</title>
 <style>
   body { font-family: -apple-system, system-ui, sans-serif; display: flex; min-height: 100vh;
@@ -13,21 +31,60 @@
   p  { opacity: .9; line-height: 1.45; }
   a.btn { display: inline-block; margin-top: 18px; padding: 14px 28px; border-radius: 14px;
           background: #fff; color: #1a6fd4; font-weight: 700; text-decoration: none; }
+  a.store { display: inline-block; margin: 6px 4px 0; padding: 10px 16px; border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, .7); color: #fff; font-weight: 600; text-decoration: none; }
   .hint { font-size: .85rem; opacity: .75; margin-top: 22px; }
+  .stores { margin-top: 22px; font-size: .9rem; }
+  .stores p { margin: 0 0 4px; }
+  [hidden] { display: none !important; }
 </style>
 </head>
 <body>
 <div class="card">
   <h1>✈️ Journeyfy</h1>
-  <p>You've been invited to a trip!</p>
-  <a class="btn" id="open" href="#">Open in Journeyfy</a>
-  <p class="hint">Nothing happening? Make sure the Journeyfy app is installed on your iPhone, then tap the button again.</p>
+  <p id="invited">You've been invited to a trip!</p>
+  <p id="missing" hidden>This invite link is incomplete. Ask the person who invited you to send it again.</p>
+  <p id="computer" hidden>Open this link on your phone to join the trip in the Journeyfy app.</p>
+  <a class="btn" id="open" href="#" hidden>Open in Journeyfy</a>
+  <p class="hint" id="hint" hidden>Nothing happening? Make sure Journeyfy is installed, then tap the button again.</p>
+  <div class="stores" id="stores">
+    <p id="get">Don't have Journeyfy yet? Get it, then come back and tap the invite link again.</p>
+    <a class="store" id="app-store" href="https://apps.apple.com/app/id6758713463">App Store</a>
+    <a class="store" id="google-play" href="https://play.google.com/store/apps/details?id=com.journeyfy.app">Google Play</a>
+  </div>
 </div>
 <script>
   var token = new URLSearchParams(location.search).get("token") || "";
+  var ua = navigator.userAgent || "";
+  var android = /Android/i.test(ua);
+  // iPadOS asks for the desktop site, so an iPad says it's a Mac with a touch screen.
+  var ios = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+  var playStore = document.getElementById("google-play").href;
   var deepLink = "journeyfy://join?token=" + encodeURIComponent(token);
-  document.getElementById("open").href = deepLink;
-  if (token) { setTimeout(function () { location.href = deepLink; }, 400); }
+  var intentLink = "intent://join?token=" + encodeURIComponent(token) +
+      "#Intent;scheme=journeyfy;package=com.journeyfy.app;S.browser_fallback_url=" +
+      encodeURIComponent(playStore) + ";end";
+
+  function show(id) { document.getElementById(id).hidden = false; }
+  function hide(id) { document.getElementById(id).hidden = true; }
+
+  if (!token) {
+    hide("invited");
+    show("missing");
+  } else if (android) {
+    document.getElementById("open").href = intentLink;
+    show("open");
+    hide("app-store");
+  } else if (ios) {
+    document.getElementById("open").href = deepLink;
+    show("open");
+    show("hint");
+    hide("google-play");
+    setTimeout(function () { location.href = deepLink; }, 400);
+  } else {
+    show("computer");
+    document.getElementById("get").textContent = "Journeyfy is on iPhone and Android:";
+  }
 </script>
 </body>
 </html>
