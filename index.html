@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!--
+  The links site's front page and Journeyfy's support page, published as the
+  journeyfy-links repo's index.html:
+  https://frandesarrolladorweb.github.io/journeyfy-links/
+  It's the Support URL in App Store Connect and the website on Google Play
+  (APP_STORE_METADATA.md), so it must always show how to reach us.
+
+  Before publishing, fill in the contact email (the placeholder in square
+  brackets and the mailto link): see docs/links-site/README.md.
+-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Journeyfy · Help</title>
+<style>
+  :root { color-scheme: light dark;
+          --text: #1c1c1e; --muted: #6b6b73; --line: #e5e5ea; --brand: #248df4; --bg: #ffffff; --panel: #f2f2f7; }
+  @media (prefers-color-scheme: dark) {
+    :root { --text: #f2f2f7; --muted: #a1a1aa; --line: #2c2c2e; --brand: #4ba3ff; --bg: #000000; --panel: #1c1c1e; }
+  }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 28px; margin: 0 0 4px; }
+  h2 { font-size: 19px; margin: 32px 0 8px; }
+  p, li { overflow-wrap: break-word; }
+  .muted { color: var(--muted); font-size: 14px; }
+  a { color: var(--brand); }
+  .ramp { height: 4px; border-radius: 2px; margin: 16px 0 24px;
+          background: linear-gradient(90deg, #248df4, #ff7c39); }
+  .stores a { display: inline-block; margin: 4px 8px 4px 0; padding: 10px 16px; border-radius: 12px;
+              background: var(--panel); font-weight: 600; text-decoration: none; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Journeyfy</h1>
+  <p class="muted">Plan a trip together: the plan, the places, bookings, shared expenses, polls, a chat and photos.</p>
+  <div class="ramp"></div>
+
+  <p class="stores">
+    <a href="https://apps.apple.com/app/id6758713463">App Store</a>
+    <a href="https://play.google.com/store/apps/details?id=com.journeyfy.app">Google Play</a>
+  </p>
+
+  <h2>Help</h2>
+  <ul>
+    <li><strong>Contact us:</strong> <a href="mailto:frandeveloper4@gmail.com">frandeveloper4@gmail.com</a></li>
+    <li><strong>Forgot your password?</strong> On the email sign-in screen, choose to reset it: we email you a
+      6-digit code to type in the app with your new password.</li>
+    <li><strong>An invite link doesn't open the app?</strong> Install Journeyfy, then tap the link again. On
+      Android, tap <em>Open in Journeyfy</em> on the page the link opens.</li>
+    <li><strong>Something offensive in a chat or a public trip?</strong> Report it from the app, or write to us.
+      We review reports within 24 hours.</li>
+    <li><strong>Delete your account:</strong> in the app, Settings → Delete Account, or
+      <a href="privacy/#delete-account">without the app</a>.</li>
+    <li><strong>Used Journeyfy before version 1.1.0?</strong> Your trips move over from iCloud:
+      <a href="privacy/#icloud">here's how</a>.</li>
+  </ul>
+
+  <h2>Legal</h2>
+  <p><a href="privacy/">Privacy Policy</a> · <a href="terms/">Terms of Use</a></p>
+</main>
+</body>
+</html>

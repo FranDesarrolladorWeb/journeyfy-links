@@ -7,6 +7,8 @@ and Android, published with GitHub Pages at https://frandesarrolladorweb.github.
   point here, and the page opens the `journeyfy://join?token=…` deep link in the app (on Android
   through an `intent://` link that falls back to Google Play).
 - `privacy/` — the privacy policy.
+- `terms/` — the terms of use.
+- `index.html` — help and contact.
 
 The pages' sources live in the Journeyfy repo, under `docs/links-site/`; edit them there and copy
 them here.

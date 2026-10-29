@@ -2,64 +2,298 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!--
+  Journeyfy's privacy policy, for 1.1.0 and later (iPhone and Android).
+  Published at https://frandesarrolladorweb.github.io/journeyfy-links/privacy/;
+  its source is docs/privacy-policy.html in the Journeyfy repo, and
+  docs/links-site/README.md there says what to check before publishing it.
+-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Journeyfy — Privacy Policy</title>
+<title>Journeyfy · Privacy Policy</title>
 <style>
-  :root { color-scheme: light dark; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-         max-width: 720px; margin: 0 auto; padding: 24px 20px 64px; line-height: 1.6; }
-  h1 { background: linear-gradient(45deg, #2486f4, #ff7c39); -webkit-background-clip: text;
-       background-clip: text; color: transparent; }
-  h2 { margin-top: 2em; }
-  footer { margin-top: 3em; font-size: .9em; opacity: .7; }
+  :root { color-scheme: light dark;
+          --text: #1c1c1e; --muted: #6b6b73; --line: #e5e5ea; --brand: #248df4; --bg: #ffffff; --panel: #f2f2f7; }
+  @media (prefers-color-scheme: dark) {
+    :root { --text: #f2f2f7; --muted: #a1a1aa; --line: #2c2c2e; --brand: #4ba3ff; --bg: #000000; --panel: #1c1c1e; }
+  }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 28px; margin: 0 0 4px; }
+  h2 { font-size: 19px; margin: 32px 0 8px; scroll-margin-top: 16px; }
+  h3 { font-size: 16px; margin: 20px 0 4px; }
+  p, li { color: var(--text); overflow-wrap: break-word; }
+  .muted { color: var(--muted); font-size: 14px; }
+  .table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; vertical-align: top; padding: 8px 6px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+  a { color: var(--brand); }
+  .ramp { height: 4px; border-radius: 2px; margin: 16px 0 24px;
+          background: linear-gradient(90deg, #248df4, #ff7c39); }
+  .panel { background: var(--panel); border-radius: 14px; padding: 4px 16px 12px; margin: 12px 0; }
+  nav ul { columns: 2 220px; padding-left: 20px; margin: 8px 0; font-size: 15px; }
 </style>
 </head>
 <body>
-<h1>Journeyfy Privacy Policy</h1>
-<p><em>Last updated: 29 August 2026</em></p>
+<main>
+  <h1>Privacy Policy</h1>
+  <p class="muted">Journeyfy for iPhone and Android · Last updated 29 October 2026</p>
+  <div class="ramp"></div>
 
-<p>Journeyfy is a collaborative travel-planning app for iOS. This policy explains what
-data the app handles and how. The short version: your data stays in Apple's iCloud
-(CloudKit), we run no servers of our own, we show no ads, and we never sell or share
-your data with anyone.</p>
+  <p>Journeyfy helps a group plan a trip together: the plan, the places, bookings, shared expenses,
+  polls, checklists, a chat and photos. This page explains what the app keeps, where, who sees it, how long
+  it's kept and how to remove it.</p>
 
-<h2>What we collect and why</h2>
-<ul>
-  <li><strong>Name and email</strong> — provided by Sign in with Apple, used to identify
-      you to your travel group (your display name on messages, expenses and polls).</li>
-  <li><strong>Content you create</strong> — trips, chat messages, expenses, polls,
-      checklists, itinerary items, and the photos/videos you choose to share with a trip
-      group.</li>
-  <li><strong>Approximate location</strong> — only while you use the trip map, to center
-      it near you. It is never stored or shared.</li>
-</ul>
+  <div class="panel">
+    <p><strong>In short</strong></p>
+    <ul>
+      <li>Your trips are stored with Supabase in the European Union (Ireland).</li>
+      <li>Only the people in a trip see it, unless its organizer shares it in Discover after it ends.</li>
+      <li>Journeyfy is free, shows no ads, sells nothing about you, has no analytics and doesn't track you
+        across apps or websites.</li>
+      <li>You can delete your account at any time: <a href="#delete-account">here's how</a>.</li>
+    </ul>
+  </div>
 
-<h2>Where it lives</h2>
-<p>All data is stored in Apple's CloudKit service, tied to your iCloud account and
-protected by Apple's security infrastructure. We operate no servers of our own and have
-no analytics or tracking SDKs. Trip content is visible only to the members of that trip.</p>
+  <nav aria-label="Contents">
+    <ul>
+      <li><a href="#who-we-are">Who we are</a></li>
+      <li><a href="#what-we-keep">What we keep and why</a></li>
+      <li><a href="#legal-basis">Legal basis</a></li>
+      <li><a href="#who-sees-it">Who sees it</a></li>
+      <li><a href="#services">Where it lives, and who helps</a></li>
+      <li><a href="#transfers">Transfers outside the EU</a></li>
+      <li><a href="#on-your-phone">On your phone</a></li>
+      <li><a href="#retention">How long we keep it</a></li>
+      <li><a href="#delete-account">Delete your account</a></li>
+      <li><a href="#icloud">Moving from the iCloud version</a></li>
+      <li><a href="#your-rights">Your rights</a></li>
+      <li><a href="#content-safety">Content safety</a></li>
+      <li><a href="#age">Minimum age</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#changes">Changes</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-<h2>What we don't do</h2>
-<ul>
-  <li>No advertising, no trackers, no analytics SDKs.</li>
-  <li>No selling, renting or sharing of your data with third parties.</li>
-  <li>No collection of data beyond what the features above need.</li>
-</ul>
+  <h2 id="who-we-are">Who we are</h2>
+  <p>Journeyfy is made by Francisco Chávez Romero, Carrer de Torns 37, 1-1, 08028 Barcelona, Spain ("we"), who decides how your data is used and is
+  responsible for it (the data controller). You can reach us at <a href="mailto:frandeveloper4@gmail.com">frandeveloper4@gmail.com</a>.
+  Using Journeyfy is also subject to our <a href="https://frandesarrolladorweb.github.io/journeyfy-links/terms/">Terms of Use</a>.</p>
 
-<h2>Content safety</h2>
-<p>You can report any message and block any user directly in the app. Reported content
-is hidden for you immediately and reviewed by us within 24 hours; accounts that post
-objectionable content are removed. There is zero tolerance for objectionable content or
-abusive behavior.</p>
+  <h2 id="what-we-keep">What we keep and why</h2>
+  <ul>
+    <li><strong>Your account:</strong> your email address and password (stored only as a secure hash), or, if you
+      use Sign in with Apple (iPhone), the identifier Apple gives us and the email address Apple shares, which can be
+      a private relay address. The name you choose, and a profile photo if you add one. To sign you in and to show
+      your group who's who.</li>
+    <li><strong>What you add to a trip:</strong> the trip itself (name, description, destination and dates), the
+      day-by-day plan, places on the map, bookings (including confirmation codes and any ticket or document you
+      attach), expenses and who owes what, polls and votes, checklists, chat messages, reactions and stickers, and
+      photos and videos. To share them with the trip's members.</li>
+    <li><strong>Payment usernames you choose to add</strong> (a PayPal.me or Revolut username), so the people you
+      travel with can pay you back. Journeyfy handles no money and never asks for card or bank details.</li>
+    <li><strong>Reports and blocks:</strong> what you report (the message or trip, and who posted it) and the
+      people you block. To keep the community safe.</li>
+    <li><strong>A notification token</strong> for your phone if you allow notifications, with the kind of phone,
+      the app version and your language. To tell you about your trips, in your language.</li>
+    <li><strong>Flight lookups:</strong> when you fill in a flight from its number, our server asks for that flight
+      and keeps the answer for about six hours, so the rest of your group gets it without asking again. We also count how
+      many flights each account looks up per day, to keep this free service working for everyone.</li>
+    <li><strong>Sign-in sessions:</strong> while you're signed in, our sign-in service keeps your session with the
+      IP address and type of device it started from. To keep your account secure.</li>
+    <li><strong>Technical logs:</strong> like any online service, our hosting provider logs each request (time,
+      IP address, what was asked for) to run and protect the service.</li>
+  </ul>
+  <p>Photos are re-saved by the app before they're uploaded, and videos are made smaller without their details,
+  which leaves out the location your camera may have stored in them. A receipt you photograph to fill in an expense is read on your phone and never uploaded or kept. (On Android, videos can be watched but not
+  added yet.)</p>
+  <p>The app doesn't collect your location. On iPhone and Android it can show where you are on the trip map if you allow it;
+  that stays on your phone. Places you pin on a trip are saved with their position, as part of the trip.</p>
+  <p>Journeyfy has no analytics, advertising or tracking code. Apple and Google may show us crash reports and
+  download statistics from people who chose to share them with app developers in their phone's settings; these
+  don't tell us who you are.</p>
 
-<h2>Deleting your data</h2>
-<p>In the app, go to <strong>Settings → Delete Account</strong>. This permanently deletes
-your profile (name and photo) and removes you from all trips. You can also delete
-individual messages and photos you created at any time.</p>
+  <h2 id="legal-basis">Legal basis</h2>
+  <p>If you're in the EU, the UK or another country with similar laws, we use your data on these grounds:</p>
+  <ul>
+    <li><strong>Our agreement with you</strong> (Art. 6(1)(b) GDPR): your account and everything the app does
+      for you and your group.</li>
+    <li><strong>Our legitimate interests</strong> (Art. 6(1)(f)): keeping Journeyfy safe and working (reports,
+      blocks, the daily flight-lookup limit, sign-in sessions, logs and backups), and moving trips from the
+      iCloud version so groups keep them. You can object to these at any time (see <a href="#your-rights">Your
+      rights</a>).</li>
+    <li><strong>Your consent</strong> (Art. 6(1)(a)): notifications, which you can turn off in your phone's
+      settings, and showing a trip in Discover, which its organizer chooses and can undo.</li>
+    <li><strong>A legal obligation</strong> (Art. 6(1)(c)), when the law requires us to keep or hand over data.</li>
+  </ul>
 
-<h2>Contact</h2>
-<p>Questions or requests: <a href="mailto:frandeveloper4@gmail.com">frandeveloper4@gmail.com</a></p>
+  <h2 id="who-sees-it">Who sees it</h2>
+  <ul>
+    <li><strong>The members of each trip</strong> see that trip's content, and the name, profile photo and payment
+      usernames of the people in it. The database itself enforces this: nobody outside a trip can read it.</li>
+    <li><strong>People with an invite link</strong> can join that trip, and then see it. Share links only with
+      people you mean to invite; they expire after 30 days at most.</li>
+    <li><strong>Public trips:</strong> if a trip's organizer makes it public, once the trip has ended other
+      Journeyfy users can see in Discover its destination, description, length and month (never the exact dates),
+      the day-by-day plan, the places and the photos nobody made private, with the organizer's name and profile
+      photo. They can copy its plan and places into a trip of their own. Its chat, expenses, polls, bookings and
+      members are never shown.</li>
+    <li><strong>The services that run Journeyfy for us</strong> (below), only to provide it.</li>
+    <li><strong>Authorities</strong>, only when the law requires us to.</li>
+  </ul>
+  <p>Nobody else. We don't sell or rent personal data, and we don't use it for advertising.</p>
 
-<footer>© 2026 Journeyfy</footer>
+  <h2 id="services">Where it lives, and who helps</h2>
+  <p>Your data is stored with <strong>Supabase</strong> (database, sign-in, file storage and our server functions)
+  in the European Union (Ireland). These services process data for us, only to run the app:</p>
+  <div class="table">
+  <table>
+    <thead><tr><th scope="col">Service</th><th scope="col">What for</th><th scope="col">What it gets</th></tr></thead>
+    <tbody>
+    <tr><td>Supabase</td><td>Database, sign-in, file storage, our server functions</td><td>Everything above, stored in the EU (Ireland)</td></tr>
+    <tr><td>Brevo (Sendinblue SAS)</td><td>Sending sign-up confirmations and password-reset codes</td><td>Your email address and the email we send you</td></tr>
+    <tr><td>GitHub</td><td>Nightly backups of the database; hosting this website and the invite page</td><td>Each night, a copy of the database, sent over an encrypted connection to a GitHub machine that encrypts it there and keeps only the encrypted copy, for 14 days; your IP address when you open these pages</td></tr>
+    <tr><td>Apple</td><td>Sign in with Apple, notifications to iPhones, the map and place search on iPhone</td><td>Your Apple sign-in, your phone's notification token and the notifications we send, what you search for on the map</td></tr>
+    <tr><td>Google (Firebase Cloud Messaging)</td><td>Notifications to Android phones</td><td>Your phone's notification token and the notifications we send</td></tr>
+    <tr><td>AeroDataBox (through RapidAPI)</td><td>Filling in a flight from its number</td><td>The flight number and date only, sent by our server, never who you are</td></tr>
+    <tr><td>Photon (komoot), with OpenStreetMap data</td><td>Place search, destination suggestions and addresses on Android</td><td>What you type, the area of the trip or the place's position, and your IP address</td></tr>
+    <tr><td>OpenFreeMap</td><td>The map on Android</td><td>Requests for the part of the map you're looking at, and your IP address</td></tr>
+    <tr><td>Frankfurter (European Central Bank rates)</td><td>Converting expenses between currencies</td><td>The two currencies, and your IP address</td></tr>
+    <tr><td>Open-Meteo</td><td>The weather forecast on each day of a trip's plan</td><td>The trip's destination, its position and your IP address, never who you are</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Links that take you out of the app (directions in Apple Maps or Google Maps, PayPal.me, Revolut, the App Store,
+  Google Play) open those services, under their own privacy policies.</p>
+
+  <h2 id="transfers">Transfers outside the EU</h2>
+  <p>Your data is stored in the EU. Supabase, GitHub, Apple and Google are based in the United States
+  (Brevo, which sends our emails, is in France, in the EU); they may reach or process data from there, for example for support or security.
+  The free map, place-search and exchange-rate services may answer from servers outside the EU; they only see your
+  request and your IP address.</p>
+  <p>When personal data leaves the European Economic Area, it's protected by a European Commission adequacy
+  decision (such as the EU–US Data Privacy Framework, for companies certified under it) or by the Commission's
+  Standard Contractual Clauses in our agreement with the provider (Art. 46 GDPR). You can ask us for a copy of
+  these safeguards at <a href="mailto:frandeveloper4@gmail.com">frandeveloper4@gmail.com</a>.</p>
+
+  <h2 id="on-your-phone">On your phone</h2>
+  <p>To keep your trips readable without a connection, the app saves a copy of them on your phone, and on iPhone
+  the Home Screen widget keeps a small copy of your next trip. Both are removed when you sign out or delete your
+  account, and the copy isn't included in phone backups. The people you block, and trip reminders such as
+  "your trip starts tomorrow", are also kept on the phone itself.</p>
+
+  <h2 id="retention">How long we keep it</h2>
+  <ul>
+    <li><strong>Your account and profile:</strong> until you delete your account.</li>
+    <li><strong>A trip and everything in it:</strong> while the trip exists. When its organizer deletes it, its
+      content, photos, videos and tickets are deleted too.</li>
+    <li><strong>Flight answers:</strong> about six hours. They hold no personal data.</li>
+    <li><strong>Reports:</strong> as long as needed to deal with them and with repeated abuse, and at most 12 months.</li>
+    <li><strong>Technical logs</strong> kept by Supabase: about a day.</li>
+    <li><strong>Backups:</strong> the database is backed up every night, encrypted, and each backup is kept for
+      14 days. Something deleted, including a deleted account, disappears from the backups within 14 days.
+      Photos, videos and tickets are copied separately, about once a week, into an encrypted archive we keep
+      offline; each copy is kept for up to 4 weeks, so a deleted photo is gone from them within 4 weeks.</li>
+  </ul>
+
+  <h2 id="delete-account">Delete your Journeyfy account</h2>
+  <p>This is how to delete your account in <strong>Journeyfy</strong>, the group trip planner by
+  <strong>Francisco Chávez Romero</strong> on the App Store and Google Play, and what happens to your data.</p>
+
+  <h3>In the app (iPhone or Android)</h3>
+  <ol>
+    <li>Open Journeyfy and sign in.</li>
+    <li>Go to the <strong>Settings</strong> tab.</li>
+    <li>Tap <strong>Delete Account</strong>, then <strong>Delete</strong> to confirm.</li>
+  </ol>
+  <p>If you signed in with Apple, your iPhone may ask you to confirm with Apple once more, so that Journeyfy's
+  access to your Apple ID is withdrawn too. Deleting the app from your phone doesn't delete your account.</p>
+
+  <h3>Without the app</h3>
+  <p>Email <a href="mailto:frandeveloper4@gmail.com?subject=Delete%20my%20Journeyfy%20account">frandeveloper4@gmail.com</a> with the
+  subject "Delete my Journeyfy account", from the email address you sign in with. If you used Sign in with Apple
+  with Hide My Email, include the address shown for Journeyfy under Sign in with Apple in your Apple ID settings.
+  We may ask you to confirm by replying from that address. We delete the account within 30 days, usually much
+  sooner, and tell you when it's done.</p>
+
+  <h3>What is deleted</h3>
+  <ul>
+    <li>Your account: email address, password, and the link to your Apple ID.</li>
+    <li>Your profile: name, profile photo and payment usernames.</li>
+    <li>Your membership of every trip.</li>
+    <li>The trips you organize that nobody else is in, with everything in them, including their photos, videos and tickets.</li>
+    <li>Your notification tokens, sign-in sessions, the people you blocked and the trips you saved in Discover.</li>
+  </ul>
+  <p><strong>Trips you organize with other people aren't deleted.</strong> Each one passes to the co-organizer who
+  joined it first or, if it has none, to the member who joined first, who becomes its organizer. A public trip
+  stays in Discover under its new organizer's name.</p>
+
+  <h3>What is kept, and for how long</h3>
+  <ul>
+    <li><strong>What you added to trips shared with others</strong> stays in those trips, so the group's trip still
+      makes sense and its balances still add up: your messages and reactions, photos and videos, places, plan
+      items, bookings and their tickets, checklists, polls and votes, and expenses, shown with the name you had.
+      They stay as long as that trip exists. You can delete your own messages and photos in the app before you
+      delete your account.</li>
+    <li><strong>Reports</strong> you sent, or that were made about you: at most 12 months.</li>
+    <li><strong>Other people's block lists</strong> keep your name, so their blocks keep working.</li>
+    <li><strong>Backups:</strong> up to 14 days for the database, up to 4 weeks for photos, videos and tickets.
+      <strong>Technical logs:</strong> about a day.</li>
+    <li><strong>If you used the iCloud version (1.0.9 or earlier):</strong> the old copy of your data in iCloud,
+      until 9 February 2027, or sooner if you ask us (see below).</li>
+  </ul>
+
+  <h2 id="icloud">Moving from the iCloud version</h2>
+  <p>Until version 1.0.9, Journeyfy kept trips in Apple's iCloud, in the app's own CloudKit database, which we
+  managed, rather than in your personal iCloud storage. From version 1.1.0, Journeyfy keeps them with Supabase in
+  the EU, so that friends without an iPhone can join your trips too.</p>
+  <ul>
+    <li><strong>One copy, on 9 November 2026:</strong> we copy the trips from the old version to the new servers once:
+      the trips, their members' names and photos, and everything in them (plans, places, bookings, expenses,
+      polls, chat, photos and videos). That includes what you wrote in your groups' trips, so your
+      group keeps its history even if you haven't updated yet. Anything added in the old version after that day
+      isn't copied.</li>
+    <li><strong>Linking your old trips to your account:</strong> the first time you sign in to the new version on
+      an iPhone signed in to the same iCloud account, the app asks iCloud to confirm who you were in the old
+      version. Apple tells our server only your old iCloud user identifier for Journeyfy, never your Apple ID
+      password. We then link your old trips to your new account, and keep a coded identifier derived from that
+      old identifier so the link can be made only once, and only by you.</li>
+    <li><strong>The old copy:</strong> once the move is done, we delete the old data from iCloud on
+      9 February 2027. If you'd rather your old data weren't moved, or want it deleted sooner, write to us.</li>
+  </ul>
+
+  <h2 id="your-rights">Your rights</h2>
+  <p>You can see and change most of your data in the app, and delete your account (see
+  <a href="#delete-account">above</a>). You can also ask us for a copy of your data, including in a format another
+  service can read, or ask us to correct it, delete it, or limit how we use it, and you can object to uses based on
+  our legitimate interests or withdraw your consent. Write to <a href="mailto:frandeveloper4@gmail.com">frandeveloper4@gmail.com</a>;
+  we answer within one month. You can also complain to your data protection authority (in Spain, the
+  <a href="https://www.aepd.es/">AEPD</a>).</p>
+
+  <h2 id="content-safety">Content safety</h2>
+  <p>Objectionable content isn't allowed (see the <a href="https://frandesarrolladorweb.github.io/journeyfy-links/terms/">Terms of Use</a>).
+  You can report any message or public trip and block anyone; reported content is hidden for you at once and
+  reviewed within 24 hours, and offending content and accounts are removed.</p>
+
+  <h2 id="age">Minimum age</h2>
+  <p>Journeyfy is for people aged 13 and over. Where the law of your country sets a higher age for using a service
+  like this without a parent's consent (in the EU it can be up to 16; in Spain it is 14), you need to be that age
+  or have your parent's or guardian's consent. If you think a child under 13 is using Journeyfy, tell us and we'll
+  delete the account.</p>
+
+  <h2 id="security">Security</h2>
+  <p>Data travels encrypted (HTTPS), the database checks who may read or change each piece of data on every
+  request, passwords are stored only as hashes, and backups are encrypted before they're stored.</p>
+
+  <h2 id="changes">Changes</h2>
+  <p>If this policy changes, we'll update this page and its date, and for important changes we'll tell you in the
+  app before they apply.</p>
+
+  <h2 id="contact">Contact</h2>
+  <p>Francisco Chávez Romero · Carrer de Torns 37, 1-1, 08028 Barcelona, Spain ·
+  <a href="mailto:frandeveloper4@gmail.com">frandeveloper4@gmail.com</a></p>
+</main>
 </body>
 </html>
