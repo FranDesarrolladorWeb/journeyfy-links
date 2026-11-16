@@ -38,7 +38,7 @@
 <body>
 <main>
   <h1>Privacy Policy</h1>
-  <p class="muted">Journeyfy for iPhone and Android · Last updated 29 October 2026</p>
+  <p class="muted">Journeyfy for iPhone and Android · Last updated 16 November 2026</p>
   <div class="ramp"></div>
 
   <p>Journeyfy helps a group plan a trip together: the plan, the places, bookings, shared expenses,
@@ -51,7 +51,7 @@
       <li>Your trips are stored with Supabase in the European Union (Ireland).</li>
       <li>Only the people in a trip see it, unless its organizer shares it in Discover after it ends.</li>
       <li>Journeyfy is free, shows no ads, sells nothing about you, has no analytics and doesn't track you
-        across apps or websites.</li>
+        across apps or websites. When the app crashes, it sends a crash report so we can fix it.</li>
       <li>You can delete your account at any time: <a href="#delete-account">here's how</a>.</li>
     </ul>
   </div>
@@ -105,15 +105,21 @@
       IP address and type of device it started from. To keep your account secure.</li>
     <li><strong>Technical logs:</strong> like any online service, our hosting provider logs each request (time,
       IP address, what was asked for) to run and protect the service.</li>
+    <li><strong>Crash reports:</strong> when the app crashes, freezes or hits an error, it sends a report: what
+      went wrong and where in the app's code, the app version, the kind of phone and its system version,
+      language, free memory and storage, and the steps the app took just before. It also counts app sessions
+      that end without a crash. Reports don't include your name, email address, account, trips or anything you
+      typed, and we've told our crash-reporting service not to store IP addresses. To find and fix bugs.</li>
   </ul>
   <p>Photos are re-saved by the app before they're uploaded, and videos are made smaller without their details,
   which leaves out the location your camera may have stored in them. A receipt you photograph to fill in an expense is read on your phone and never uploaded or kept. (On Android, videos can be watched but not
   added yet.)</p>
   <p>The app doesn't collect your location. On iPhone and Android it can show where you are on the trip map if you allow it;
   that stays on your phone. Places you pin on a trip are saved with their position, as part of the trip.</p>
-  <p>Journeyfy has no analytics, advertising or tracking code. Apple and Google may show us crash reports and
-  download statistics from people who chose to share them with app developers in their phone's settings; these
-  don't tell us who you are.</p>
+  <p>Journeyfy has no analytics, advertising or tracking code: apart from the crash reports above, it doesn't
+  record what you do in the app. Apple and Google may also show us crash reports and download statistics from
+  people who chose to share them with app developers in their phone's settings; these don't tell us who you
+  are.</p>
 
   <h2 id="legal-basis">Legal basis</h2>
   <p>If you're in the EU, the UK or another country with similar laws, we use your data on these grounds:</p>
@@ -121,7 +127,7 @@
     <li><strong>Our agreement with you</strong> (Art. 6(1)(b) GDPR): your account and everything the app does
       for you and your group.</li>
     <li><strong>Our legitimate interests</strong> (Art. 6(1)(f)): keeping Journeyfy safe and working (reports,
-      blocks, the daily flight-lookup limit, sign-in sessions, logs and backups), and moving trips from the
+      blocks, the daily flight-lookup limit, sign-in sessions, logs, crash reports and backups), and moving trips from the
       iCloud version so groups keep them. You can object to these at any time (see <a href="#your-rights">Your
       rights</a>).</li>
     <li><strong>Your consent</strong> (Art. 6(1)(a)): notifications, which you can turn off in your phone's
@@ -156,6 +162,7 @@
     <tr><td>Brevo (Sendinblue SAS)</td><td>Sending sign-up confirmations and password-reset codes</td><td>Your email address and the email we send you</td></tr>
     <tr><td>GitHub</td><td>Nightly backups of the database; hosting this website and the invite page</td><td>Each night, a copy of the database, sent over an encrypted connection to a GitHub machine that encrypts it there and keeps only the encrypted copy, for 14 days; your IP address when you open these pages</td></tr>
     <tr><td>Apple</td><td>Sign in with Apple, notifications to iPhones, the map and place search on iPhone</td><td>Your Apple sign-in, your phone's notification token and the notifications we send, what you search for on the map</td></tr>
+    <tr><td>Sentry (Functional Software, Inc.)</td><td>Crash and error reports</td><td>The crash reports described above, stored in the EU (Frankfurt, Germany), without IP addresses</td></tr>
     <tr><td>Google (Firebase Cloud Messaging)</td><td>Notifications to Android phones</td><td>Your phone's notification token and the notifications we send</td></tr>
     <tr><td>AeroDataBox (through RapidAPI)</td><td>Filling in a flight from its number</td><td>The flight number and date only, sent by our server, never who you are</td></tr>
     <tr><td>Photon (komoot), with OpenStreetMap data</td><td>Place search, destination suggestions and addresses on Android</td><td>What you type, the area of the trip or the place's position, and your IP address</td></tr>
@@ -169,7 +176,7 @@
   Google Play) open those services, under their own privacy policies.</p>
 
   <h2 id="transfers">Transfers outside the EU</h2>
-  <p>Your data is stored in the EU. Supabase, GitHub, Apple and Google are based in the United States
+  <p>Your data is stored in the EU. Supabase, GitHub, Apple, Google and Sentry are based in the United States
   (Brevo, which sends our emails, is in France, in the EU); they may reach or process data from there, for example for support or security.
   The free map, place-search and exchange-rate services may answer from servers outside the EU; they only see your
   request and your IP address.</p>
@@ -192,6 +199,7 @@
     <li><strong>Flight answers:</strong> about six hours. They hold no personal data.</li>
     <li><strong>Reports:</strong> as long as needed to deal with them and with repeated abuse, and at most 12 months.</li>
     <li><strong>Technical logs</strong> kept by Supabase: about a day.</li>
+    <li><strong>Crash reports:</strong> at most 90 days.</li>
     <li><strong>Backups:</strong> the database is backed up every night, encrypted, and each backup is kept for
       14 days. Something deleted, including a deleted account, disappears from the backups within 14 days.
       Photos, videos and tickets are copied separately, about once a week, into an encrypted archive we keep
