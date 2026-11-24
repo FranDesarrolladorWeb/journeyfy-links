@@ -16,6 +16,11 @@
     Android opens these links in the app without showing this page at all.
   - Anything else (a computer): says to open the link on the phone.
 
+  Context: the page asks the production join-info function what the invite is
+  for (the trip's name, place, dates, size and organizer — nothing else) and
+  shows it, so the invite looks real before the app opens. When the function
+  can't answer (offline, not deployed yet), the generic text below stays.
+
   The store ids: App Store 6758713463 (AppUpdateService.appStoreId), Google Play
   com.journeyfy.app (Skip.env ANDROID_APPLICATION_ID, the Android applicationId).
 -->
@@ -26,9 +31,13 @@
   body { font-family: -apple-system, system-ui, sans-serif; display: flex; min-height: 100vh;
          align-items: center; justify-content: center; margin: 0;
          background: linear-gradient(135deg, #66b3ff, #ff9966); color: #fff; text-align: center; }
-  .card { padding: 32px 24px; max-width: 340px; }
+  .card { padding: 32px 24px; max-width: 360px; }
   h1 { font-size: 1.6rem; margin: 0 0 8px; }
-  p  { opacity: .9; line-height: 1.45; }
+  p  { opacity: .92; line-height: 1.45; }
+  .trip { margin: 18px 0 6px; padding: 16px; border-radius: 16px; background: rgba(255,255,255,.16); }
+  .trip .dest { font-weight: 700; font-size: 1.05rem; }
+  .trip .dates { font-size: .95rem; margin-top: 4px; }
+  .trip .who { font-size: .9rem; margin-top: 6px; opacity: .85; }
   a.btn { display: inline-block; margin-top: 18px; padding: 14px 28px; border-radius: 14px;
           background: #fff; color: #1a6fd4; font-weight: 700; text-decoration: none; }
   a.store { display: inline-block; margin: 6px 4px 0; padding: 10px 16px; border-radius: 12px;
@@ -43,6 +52,14 @@
 <div class="card">
   <h1>✈️ Journeyfy</h1>
   <p id="invited">You've been invited to a trip!</p>
+  <div class="trip" id="trip" hidden>
+    <div class="dest" id="tripName"></div>
+    <div class="dates" id="tripDates"></div>
+    <div class="who" id="tripWho"></div>
+    <div class="who" id="tripBy"></div>
+  </div>
+  <p id="expired" hidden>This invite link has expired. Ask the organizer to send a new one.</p>
+  <p id="full" hidden>This trip is full (30 people).</p>
   <p id="missing" hidden>This invite link is incomplete. Ask the person who invited you to send it again.</p>
   <p id="computer" hidden>Open this link on your phone to join the trip in the Journeyfy app.</p>
   <a class="btn" id="open" href="#" hidden>Open in Journeyfy</a>
@@ -55,22 +72,126 @@
 </div>
 <script>
   var token = new URLSearchParams(location.search).get("token") || "";
+  var src = new URLSearchParams(location.search).get("src") || "";
   var ua = navigator.userAgent || "";
   var android = /Android/i.test(ua);
   // iPadOS asks for the desktop site, so an iPad says it's a Mac with a touch screen.
   var ios = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
   var playStore = document.getElementById("google-play").href;
-  var deepLink = "journeyfy://join?token=" + encodeURIComponent(token);
-  var intentLink = "intent://join?token=" + encodeURIComponent(token) +
+  var srcParam = src ? "&src=" + encodeURIComponent(src) : "";
+  var deepLink = "journeyfy://join?token=" + encodeURIComponent(token) + srcParam;
+  var intentLink = "intent://join?token=" + encodeURIComponent(token) + srcParam +
       "#Intent;scheme=journeyfy;package=com.journeyfy.app;S.browser_fallback_url=" +
       encodeURIComponent(playStore) + ";end";
 
   function show(id) { document.getElementById(id).hidden = false; }
   function hide(id) { document.getElementById(id).hidden = true; }
 
+  // The page's own strings, by language (English is the fallback).
+  var lang = (navigator.language || "en").slice(0, 2).toLowerCase();
+  var S = {
+    en: { expired: "This invite link has expired. Ask the organizer to send a new one.",
+          full: "This trip is full (30 people).",
+          open: "Open in Journeyfy", hint: "Nothing happening? Make sure Journeyfy is installed, then tap the button again.",
+          get: "Don't have Journeyfy yet? Get it, then come back and tap the invite link again.",
+          computer: "Open this link on your phone to join the trip in the Journeyfy app.",
+          missing: "This invite link is incomplete. Ask the person who invited you to send it again.",
+          going: ["friend is going", "friends are going"], by: "invited you" },
+    es: { expired: "Este enlace de invitación ha caducado. Pide al organizador que te envíe uno nuevo.",
+          full: "Este viaje está completo (30 personas).",
+          open: "Abrir en Journeyfy", hint: "¿No pasa nada? Comprueba que Journeyfy está instalado y vuelve a tocar el botón.",
+          get: "¿Aún no tienes Journeyfy? Descárgalo y vuelve a tocar el enlace de invitación.",
+          computer: "Abre este enlace en tu teléfono para unirte al viaje en la app Journeyfy.",
+          missing: "Este enlace de invitación está incompleto. Pide a quien te invitó que te lo envíe de nuevo.",
+          going: ["amigo va", "amigos van"], by: "te ha invitado" },
+    ca: { expired: "Aquest enllaç d'invitació ha caducat. Demana a l'organitzador que te n'enviï un de nou.",
+          full: "Aquest viatge és ple (30 persones).",
+          open: "Obre a Journeyfy", hint: "No passa res? Comprova que Journeyfy està instal·lada i torna a tocar el botó.",
+          get: "Encara no tens Journeyfy? Descarrega-la i torna a tocar l'enllaç d'invitació.",
+          computer: "Obre aquest enllaç al telèfon per unir-te al viatge a l'app Journeyfy.",
+          missing: "Aquest enllaç d'invitació està incomplet. Demana a qui t'ha convidat que te'l torni a enviar.",
+          going: ["amic hi va", "amics hi van"], by: "t'ha convidat" },
+    de: { expired: "Dieser Einladungslink ist abgelaufen. Bitte die Organisatorin oder den Organisator um einen neuen.",
+          full: "Diese Reise ist voll (30 Personen).",
+          open: "In Journeyfy öffnen", hint: "Passiert nichts? Prüfe, ob Journeyfy installiert ist, und tippe erneut auf den Button.",
+          get: "Noch kein Journeyfy? Hol dir die App und tippe den Einladungslink danach erneut an.",
+          computer: "Öffne diesen Link auf deinem Handy, um der Reise in der Journeyfy-App beizutreten.",
+          missing: "Dieser Einladungslink ist unvollständig. Bitte die Person, die dich eingeladen hat, ihn erneut zu senden.",
+          going: ["Freund fährt mit", "Freunde fahren mit"], by: "hat dich eingeladen" },
+    fr: { expired: "Ce lien d'invitation a expiré. Demande à l'organisateur de t'en envoyer un nouveau.",
+          full: "Ce voyage est complet (30 personnes).",
+          open: "Ouvrir dans Journeyfy", hint: "Rien ne se passe ? Vérifie que Journeyfy est installée, puis retape le bouton.",
+          get: "Tu n'as pas encore Journeyfy ? Télécharge-la, puis retape le lien d'invitation.",
+          computer: "Ouvre ce lien sur ton téléphone pour rejoindre le voyage dans l'app Journeyfy.",
+          missing: "Ce lien d'invitation est incomplet. Demande à la personne qui t'a invité de te le renvoyer.",
+          going: ["ami part", "amis partent"], by: "t'a invité·e" },
+    it: { expired: "Questo link d'invito è scaduto. Chiedi all'organizzatore di inviartene uno nuovo.",
+          full: "Questo viaggio è al completo (30 persone).",
+          open: "Apri in Journeyfy", hint: "Non succede nulla? Controlla che Journeyfy sia installata e tocca di nuovo il pulsante.",
+          get: "Non hai ancora Journeyfy? Scaricala e tocca di nuovo il link d'invito.",
+          computer: "Apri questo link sul telefono per unirti al viaggio nell'app Journeyfy.",
+          missing: "Questo link d'invito è incompleto. Chiedi a chi ti ha invitato di inviartelo di nuovo.",
+          going: ["amico parte", "amici partono"], by: "ti ha invitato" },
+    pl: { expired: "Ten link zaproszenia wygasł. Poproś organizatora o nowy.",
+          full: "Ta podróż jest już pełna (30 osób).",
+          open: "Otwórz w Journeyfy", hint: "Nic się nie dzieje? Sprawdź, czy Journeyfy jest zainstalowana, i dotknij przycisku ponownie.",
+          get: "Nie masz jeszcze Journeyfy? Pobierz ją i dotknij linku zaproszenia ponownie.",
+          computer: "Otwórz ten link na telefonie, aby dołączyć do podróży w aplikacji Journeyfy.",
+          missing: "Ten link zaproszenia jest niekompletny. Poproś osobę, która Cię zaprosiła, aby wysłała go ponownie.",
+          going: ["znajomy jedzie", "znajomych jedzie"], by: "zaprasza Cię" },
+  };
+  var T = S[lang] || S.en;
+  var trip = document.getElementById("trip");
+  var blocked = false;   // expired or full: no auto-open, no open button
+
   if (!token) {
-    hide("invited");
+    hide("invited"); hide("trip");
+    document.getElementById("missing").textContent = T.missing;
     show("missing");
+  } else {
+    document.getElementById("open").textContent = T.open;
+    document.getElementById("hint").textContent = T.hint;
+    document.getElementById("get").textContent = T.get;
+    document.getElementById("computer").textContent = T.computer;
+    document.getElementById("expired").textContent = T.expired;
+    document.getElementById("full").textContent = T.full;
+    document.getElementById("missing").textContent = T.missing;
+
+    // What the invite is for, from the production join-info function. If it
+    // can't answer, the generic line above is all there is.
+    fetch("https://snfsxyrudodisizdrxyv.supabase.co/functions/v1/join-info?token=" + encodeURIComponent(token))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (info) {
+        if (!info) return;
+        hide("invited");
+        if (info.is_expired) { show("expired"); blocked = true; return; }
+        if (info.is_full) { show("full"); blocked = true; return; }
+        show("trip");
+        document.getElementById("tripName").textContent = info.name || "";
+        if (info.destination) {
+          document.getElementById("tripName").textContent += " — " + info.destination;
+        }
+        if (info.start_date && info.end_date) {
+          var opts = { day: "numeric", month: "short" };
+          var a = new Date(info.start_date), b = new Date(info.end_date);
+          if (a.getFullYear() !== new Date().getFullYear() || b.getFullYear() !== new Date().getFullYear()) opts.year = "numeric";
+          var fmt = new Intl.DateTimeFormat(lang || "en", opts);
+          document.getElementById("tripDates").textContent = fmt.format(a) + " – " + fmt.format(b);
+        }
+        var n = info.member_count || 0;
+        document.getElementById("tripWho").textContent =
+          (n === 1 ? "1 " + T.going[0] : n + " " + T.going[1]);
+        if (info.organizer_name) {
+          document.getElementById("tripBy").textContent = info.organizer_name + " " + T.by;
+        }
+      })
+      .catch(function () { /* no context: the generic text stays */ });
+  }
+
+  if (!token) {
+    // nothing else to show
+  } else if (blocked) {
+    hide("open");
   } else if (android) {
     document.getElementById("open").href = intentLink;
     show("open");
@@ -83,6 +204,7 @@
     setTimeout(function () { location.href = deepLink; }, 400);
   } else {
     show("computer");
+    hide("open");
     document.getElementById("get").textContent = "Journeyfy is on iPhone and Android:";
   }
 </script>
